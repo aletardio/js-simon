@@ -11,13 +11,20 @@ function generateRandomNumbers(){
 
 }
 
-// Dichiarazione della variabile
-let result = generateRandomNumbers();
+// Definizione della funzione per la creazione del timer
+function displayNumbers(){
+    let numbers = document.getElementById('number');
+    let randomNumbers = generateRandomNumbers();
+    numbers.textContent = randomNumbers.join(', ');
 
-// Creazione del timer di 30 secondi
-setTimeout(function(){
-    result;
-}, 30000);
-console.log(result);
+    // Creazione del timer di 30 secondi
+    setTimeout(function(){
+        numbers.textContent = 'Numeri scomparsi';
 
-document.getElementById('number').innerHTML = `${result}`;
+        // Inserimento dei numeri scomparsi tramite l'uso del prompt
+        let numbersAdd = prompt('Inserisci i numeri scomparsi');
+        alert('Hai inserito i numeri: ' + numbersAdd);
+    }, 30000);
+}
+
+displayNumbers();
