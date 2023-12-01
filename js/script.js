@@ -21,28 +21,37 @@ function displayNumbers(){
     setTimeout(function(){
         numbers.textContent = 'Numeri scomparsi';
 
-        // Inserimento dei numeri scomparsi tramite l'uso del prompt
-        let numbersAdd = prompt('Inserisci i numeri scomparsi');
-        
-        alert('Hai inserito i numeri: ' + numbersAdd);
-
-        // Il software dovrà dire quali numeri sono stati individuati
         let numbersDiscover = [];
-        let numbersNotDiscover = [];
+        let attempt = 5;
 
-        for(let i = 0; i < randomNumbers.length; i++){
-            if(numbersAdd.includes(randomNumbers[i])) {
-                numbersDiscover.push(randomNumbers[i]);
-                numbers.textContent = 'Numeri individuati: ' + numbersDiscover;
+        // Definizione della funzione per dire quanti e quali numeri sono stati individuati
+        function found_number(){
+            if(attempt > 0) {
+                let numberAdded = prompt('Inserisci i numeri che hai memorizzato');
+                let numberAddedInt = parseInt(numberAdded);
+
+                if(!isNaN(numberAddedInt) && randomNumbers.includes(numberAddedInt)){
+                    numbersDiscover.push(numberAddedInt);
+                    attempt--;
+                    found_number();
+                }
+                else{
+                    alert('Numero non valido o non corrispondente a quelli visti');
+                    found_number();
+                }
             }
-            else{
-                numbersNotDiscover.push(randomNumbers[i]);
-                numbers.textContent = 'Numeri individuati: ' + numbersNotDiscover;
+            else {
+                // Tutti i numeri sono stati inseriti
+                alert('Hai individuato ' + numbersDiscover.length + ' numeri: ' + numbersDiscover.join(', '));
             }
         }
 
+        // Richiesta dei numeri dopo i 30 secondi
+        found_number();
+        numbers.textContent = 'Hai individuato ' + numbersDiscover.length + ' numeri: ' + numbersDiscover.join(', ');
 
     }, 30000);
 }
 
+// Avvio della visualizzazione dei numeri
 displayNumbers();
