@@ -15,7 +15,7 @@ function generateRandomNumbers(){
 function displayNumbers(){
     let numbers = document.getElementById('number');
     let randomNumbers = generateRandomNumbers();
-    numbers.textContent = randomNumbers.join(', ');
+    numbers.textContent = randomNumbers;
 
     // Creazione del timer di 30 secondi
     setTimeout(function(){
@@ -23,7 +23,25 @@ function displayNumbers(){
 
         // Inserimento dei numeri scomparsi tramite l'uso del prompt
         let numbersAdd = prompt('Inserisci i numeri scomparsi');
+        
         alert('Hai inserito i numeri: ' + numbersAdd);
+
+        // Il software dovrà dire quali numeri sono stati individuati
+        let numbersDiscover = [];
+        let numbersNotDiscover = [];
+
+        for(let i = 0; i < randomNumbers.length; i++){
+            if(numbersAdd.includes(randomNumbers[i])) {
+                numbersDiscover.push(randomNumbers[i]);
+                numbers.textContent = 'Numeri individuati: ' + numbersDiscover;
+            }
+            else{
+                numbersNotDiscover.push(randomNumbers[i]);
+                numbers.textContent = 'Numeri individuati: ' + numbersNotDiscover;
+            }
+        }
+
+
     }, 30000);
 }
 
