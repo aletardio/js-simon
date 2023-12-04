@@ -17,6 +17,27 @@ function displayNumbers(){
     let randomNumbers = generateRandomNumbers();
     numbers.textContent = randomNumbers;
 
+// Definizione della funzione per dire quanti e quali numeri sono stati individuati
+function found_number(){
+    if(attempt > 0) {
+        let numberAdded = prompt('Inserisci i numeri che hai memorizzato');
+        let numberAddedInt = parseInt(numberAdded);
+
+        if(!isNaN(numberAddedInt) && randomNumbers.includes(numberAddedInt)){
+            numbersDiscover.push(numberAddedInt);
+            attempt--;
+            found_number();
+        }
+        else{
+            alert('Numero non valido o non corrispondente a quelli visti');
+            found_number();
+        }
+    }
+    else {
+        // Tutti i numeri sono stati inseriti
+        alert('Hai individuato ' + numbersDiscover.length + ' numeri: ' + numbersDiscover.join(', '));
+    }
+}
     // Creazione del timer di 30 secondi
     setTimeout(function(){
         numbers.textContent = 'Numeri scomparsi';
@@ -24,27 +45,6 @@ function displayNumbers(){
         let numbersDiscover = [];
         let attempt = 5;
 
-        // Definizione della funzione per dire quanti e quali numeri sono stati individuati
-        function found_number(){
-            if(attempt > 0) {
-                let numberAdded = prompt('Inserisci i numeri che hai memorizzato');
-                let numberAddedInt = parseInt(numberAdded);
-
-                if(!isNaN(numberAddedInt) && randomNumbers.includes(numberAddedInt)){
-                    numbersDiscover.push(numberAddedInt);
-                    attempt--;
-                    found_number();
-                }
-                else{
-                    alert('Numero non valido o non corrispondente a quelli visti');
-                    found_number();
-                }
-            }
-            else {
-                // Tutti i numeri sono stati inseriti
-                alert('Hai individuato ' + numbersDiscover.length + ' numeri: ' + numbersDiscover.join(', '));
-            }
-        }
 
         // Richiesta dei numeri dopo i 30 secondi
         found_number();
