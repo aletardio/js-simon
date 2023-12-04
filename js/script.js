@@ -3,7 +3,7 @@ function generateRandomNumbers(){
     let randomNumbers = [];
 
     for(let i = 0; i < 5; i++){
-        let randomNumber = Math.floor(Math.random() * 5) + 1;
+        let randomNumber = Math.floor(Math.random() * 100) + 1;
         randomNumbers.push(randomNumber);
     }
 
